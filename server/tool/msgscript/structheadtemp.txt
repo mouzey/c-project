@@ -1,0 +1,51 @@
+#ifndef _PROTOCOL_STRUCT_H_
+#define _PROTOCOL_STRUCT_H_
+#include<map>
+#include<unordered_map>
+#include<set>
+#include<unordered_set>
+#include<vector>
+#include<list>
+#include<forward_list>
+#include<deque>
+#include<string>
+#include "protocolenum.h"
+%for msg in arrstruct:
+%if "" != msg.desc:
+/*${msg.desc}*/
+%endif
+struct S${msg.name}
+{
+	%for data in msg.data:
+	${data.datatype} m_${data.name};\
+	%if "" != data.desc:
+		/*${data.desc}*/
+	%else:
+		
+	%endif
+	%endfor
+	S${msg.name}();
+	S${msg.name}(
+	%for index,data in enumerate(msg.data):
+	%if index +1 == len(msg.data):
+	%if data.consttype==1:
+		const ${data.datatype}& ${data.name});
+	%else:
+		${data.datatype} ${data.name});
+	%endif
+	%else:
+	%if data.consttype==1:
+		const ${data.datatype}& ${data.name},
+	%else:
+		${data.datatype} ${data.name},
+	%endif
+	%endif
+	%endfor
+	void Encode()const;
+	%if msg.decode==1:
+	void Decode();
+	%endif
+};
+
+%endfor
+#endif//_PROTOCOL_STRUCT_H_

@@ -1,0 +1,19 @@
+#include"${name.lower()}mgr.h"
+#include"traitsmsghandle.h"
+REGMGHHANDLE(C${name}Mgr)
+bool  C${name}Mgr::Register()
+{
+	%for msg in arrstruct:
+%if msg.suffix=="Req":
+	REGFUN(&C${name}Mgr::Do${msg.name});
+%endif
+%endfor
+	return false;
+}
+%for msg in arrstruct:
+%if msg.suffix=="Req":
+void C${name}Mgr::Do${msg.name}(CRole* role,S${msg.name}&& stReq)
+{
+}
+%endif
+%endfor

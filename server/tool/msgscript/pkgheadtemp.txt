@@ -1,0 +1,27 @@
+#pragma once
+#include<string>
+#include<memory>
+#include "pkgbase.h"
+#include"${name.lower()}protocol.h"
+class CRole;
+class C${name}Pkg :public CPkgBase
+{
+public:
+	C${name}Pkg(CRole* role, std::string* pkg) :CPkgBase(role, pkg) {}
+	bool static Register();
+	virtual uint32_t GetScore()const;
+	virtual void CalcProp(AttributeMgr* mgr)const;
+	virtual void SyncData()const;
+	virtual void ToString(std::string& str)const;
+	virtual void FromString(const std::string& str);
+	virtual void Init();
+	virtual void Offline();
+	virtual void NeWDay();
+	virtual uint8_t GetIndex() { return PkgIndexVal<C${name}Pkg>::index; };
+public:
+%for msg in arrstruct:
+%if msg.suffix=="Req":
+	void Do${msg.name}(CRole* role,S${msg.name}&& stReq);
+%endif
+%endfor
+};

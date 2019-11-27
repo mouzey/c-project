@@ -1,0 +1,9 @@
+#include"${name.lower()}loader.h"
+#include "configmanager.h"
+REGHOLDER(C${name[0].upper()}${name[1:]}CfgLoader)
+bool C${name[0].upper()}${name[1:]}CfgLoader::LoadCfg()
+{	
+	if(CBaseLoader::Load("data/${name}.csv"))return true;
+	WRITE_ERROR_LOG("load ${name}.csv has error");
+	return false;
+}

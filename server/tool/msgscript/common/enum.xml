@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 可以用于协议传输中的枚举类型定义 只支持u8 i8 u16 i16 u32 i32 u64 i64
+--> 
+<root>
+<enum name="SkillType" type="u8" desc="技能类型枚举">
+<data name="type1"  value="0" desc="技能类型1 value字段可选默认会从0开始编号"/>
+<data name="type2"  value="1"   desc=""/>
+</enum>
+<enum name="ActType" type="i8" desc="">
+<data name="type1"  value="" desc="活动类型1 value字段可选默认会从0开始编号"/>
+<data name="type2"  value=""   desc=""/>
+</enum>
+</root>

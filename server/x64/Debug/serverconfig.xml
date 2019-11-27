@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+<AgentClient port="28888" ip="127.0.0.1"/>
+<AgentRouter port="26666" ip="127.0.0.1"/>
+<HttpServer  port="27777" ip="127.0.0.1"/>
+<HttpClient  port="24444" ip="127.0.0.1"/>
+<GameServer  port="25555" ip="127.0.0.1"/>
+<CrossServer port="29999" ip="127.0.0.1"/>
+<Log level="0"/>
+<Common zoneid="1" iscross="0"/>
+<db port="3306" ip="127.0.0.1" user="root" password="123456" tablename="test"/>
+<dbLog port="3306" ip="127.0.0.1" user="root" password="123456" tablename="log"/>
+</root>

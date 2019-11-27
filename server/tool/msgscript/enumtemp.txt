@@ -1,0 +1,28 @@
+#ifndef PROTOCOL_ENUM_H_
+#define PROTOCOL_ENUM_H_
+#include<cstdint>
+%for msg in arrenum:
+%if "" != msg.desc:
+/*${msg.desc}*/
+%endif
+enum E${msg.name}:${msg.enumtype}
+{
+%for data in msg.data:
+	%if "" != data.desc:
+		%if "" != data.value:
+	enm${msg.name}_${data.name} = ${data.value},/*${data.desc}*/
+		%else:
+	enm${msg.name}_${data.name},/*${data.desc}*/
+		%endif
+	%else:
+		%if "" != data.value:
+	enm${msg.name}_${data.name} = ${data.value},
+		%else:
+	enm${msg.name}_${data.name},
+		%endif
+	%endif
+%endfor
+};
+
+%endfor
+#endif

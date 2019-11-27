@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 公用结构体定义 arr=map的是才会对keytype进行编码 ketype不编码的时候不生成decode函数
+--> 
+<root>
+<struct name="CSMsgHead" desc="客户端和服务器通信协议头">
+<data name="MsgSize"  type="i8" desc="消息长度"/>
+<data name="MsgID"  type="u8" desc=""/>
+</struct>
+<struct name="TestMsgStruct" desc="">
+	<data name="roleID"  type="u64" desc="基础类型"/>
+	<data name="name"  type="string" desc="字符类型"/>
+	<data name="head"  type="CSMsgHead"  desc="结构体类型"/>
+	<data name="skilltype"  type="SkillType"  desc="枚举类型"/>
+	<data name="vectorvtest1"  		type="i32" arr ="vector" arrtype="vector" desc="arr字段取值为vector表示数组 为map表示键值对 arrtype表示后端用的数据类型 如果没有那直接使用arr作为后端数据类型"/>
+	<data name="vectorvtest2"  type="string" arr ="vector" arrtype="vector" desc="arr字段取值为vector表示数组 为map表示键值对 arrtype表示后端用的数据类型 如果没有那直接使用arr作为后端数据类型"/>
+	<data name="vectorvtest3"  type="CSMsgHead" arr ="vector" arrtype="vector" desc="arr字段取值为vector表示数组 为map表示键值对 arrtype表示后端用的数据类型 如果没有那直接使用arr作为后端数据类型"/>
+	<data name="maptest1"  					type="CSMsgHead" arr="map" arrtype="map" keytype="i32" desc="arr字段取值为vector表示数组 为map表示键值对 arrtype表示后端用的数据类型 如果没有那直接使用arr作为后端数据类型"/>
+	<data name="maptest2"  					type="CSMsgHead" arr="vector" arrtype="map" keytype="i32" desc="arr字段取值为vector表示数组 为map表示键值对 arrtype表示后端用的数据类型 如果没有那直接使用arr作为后端数据类型"/>
+</struct>
+</root>

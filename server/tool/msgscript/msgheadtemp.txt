@@ -1,0 +1,46 @@
+#ifndef _${name.upper()}_PROTOCOL_H_
+#define _${name.upper()}_PROTOCOL_H_
+#include "msgbase.h"
+#include "protocolstruct.h"
+%for msg in arrstruct:
+%if "" != msg.desc:
+/*${msg.desc}*/
+%endif
+struct S${msg.name}:public CMsgBase
+{
+	%for data in msg.data:
+	${data.datatype} m_${data.name};\
+	%if "" != data.desc:
+		/*${data.desc}*/
+	%else:
+		
+	%endif
+	%endfor
+	static uint16_t Code(){return ${msg.msgid};}
+	S${msg.name}();
+	%if len(msg.data) > 0 :
+	S${msg.name}(
+	%for index,data in enumerate(msg.data):
+	%if index +1 == len(msg.data):
+	%if data.consttype==1:
+		const ${data.datatype}& ${data.name});
+	%else:
+		${data.datatype} ${data.name});
+	%endif
+	%else:
+	%if data.consttype==1:
+		const ${data.datatype}& ${data.name},
+	%else:
+		${data.datatype} ${data.name},
+	%endif
+	%endif
+	%endfor
+	%endif
+	bool Encode()const;
+	%if msg.decode==1:
+	bool Decode();
+	%endif
+};
+
+%endfor
+#endif//_${name.upper()}_PROTOCOL_H_

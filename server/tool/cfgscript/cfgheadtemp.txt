@@ -1,0 +1,36 @@
+#ifndef _${name.upper()}_CFG_H_
+#define _${name.upper()}_CFG_H_
+#include<cstdint>
+#include<cstring>
+#include "readcsv.h"
+struct S${name[0].upper()}${name[1:]}Config
+{
+	static uint16_t GetCol(){return ${len(datalist)};}
+	%if datalist[0].datatype == "std::string":
+	const ${datalist[0].datatype}& GetId()const{return ${datalist[0].name};}
+	%else:
+	${datalist[0].datatype} GetId()const{return ${datalist[0].name};}
+	%endif
+	void ReadData(CReadCsv& csv)
+	{
+		%for index,data in enumerate(datalist):
+		csv.ReadValue(${index},${data.name});
+		%endfor
+	}
+	%for data in datalist:
+	%if data.desc !="":
+	%if data.default != "":
+	${data.datatype} ${data.name} = ${data.default};/*${data.desc}*/
+	%else:
+	${data.datatype} ${data.name};/*${data.desc}*/
+	%endif
+	%else:
+	%if data.default != "":
+	${data.datatype} ${data.name} = ${data.default};
+	%else:
+	${data.datatype} ${data.name};
+	%endif
+	%endif
+	%endfor
+};
+#endif

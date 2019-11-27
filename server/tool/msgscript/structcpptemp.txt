@@ -1,0 +1,63 @@
+#include"protocolstruct.h"
+#include"codebase.h"
+
+%for msg in arrstruct:
+S${msg.name}::S${msg.name}()<%first=1%>
+%for index,data in enumerate(msg.data):
+%if data.default!="":
+%if 1 == first:
+	:m_${data.name}(${data.default})<%first=0%>
+%else:
+	,m_${data.name}(${data.default})<%first=0%>
+%endif
+%endif
+%endfor
+{}
+
+S${msg.name}::S${msg.name}(
+	%for index,data in enumerate(msg.data):
+	%if index +1 == len(msg.data):
+	%if data.consttype==1:
+		const ${data.datatype}& ${data.name}):
+	%else:
+		${data.datatype} ${data.name}):
+	%endif
+	%else:
+	%if data.consttype==1:
+		const ${data.datatype}& ${data.name},
+	%else:
+		${data.datatype} ${data.name},
+	%endif
+	%endif
+	%endfor
+	%for index,data in enumerate(msg.data):
+	%if index+1 == len(msg.data):
+	m_${data.name}(${data.name})
+	%else:
+	m_${data.name}(${data.name}),
+	%endif
+	%endfor
+	{}
+	
+void S${msg.name}::Encode()const
+{
+	%for data in msg.data:
+	%if data.keycode == 0:
+	for(auto& iter : m_${data.name})
+		CCode::Encode(iter.second);
+	%else:
+	CCode::Encode(m_${data.name});
+	%endif
+	%endfor
+}
+
+%if msg.decode==1:
+void S${msg.name}::Decode()
+{
+%for data in msg.data:
+	CCode::Decode(m_${data.name});
+%endfor
+}
+
+%endif
+%endfor

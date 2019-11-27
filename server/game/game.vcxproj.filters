@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="config">
+      <UniqueIdentifier>{16f1dfb5-fb38-4d8a-8d65-1fc467447bee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sql">
+      <UniqueIdentifier>{714c6414-2818-4c94-ba4b-b583e9d0df3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="protocol">
+      <UniqueIdentifier>{b7963903-6bf3-40c8-99cb-1c5e22d694e7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="game.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="gameserver.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="gameconfig.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="gameroutersocket.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="httpreqsocket.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="httpsreqsocket.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="config\redloader.cpp">
+      <Filter>config</Filter>
+    </ClCompile>
+    <ClCompile Include="config\testloader.cpp">
+      <Filter>config</Filter>
+    </ClCompile>
+    <ClCompile Include="sql\guilddatarecord.cpp">
+      <Filter>sql</Filter>
+    </ClCompile>
+    <ClCompile Include="sql\roledatarecord.cpp">
+      <Filter>sql</Filter>
+    </ClCompile>
+    <ClCompile Include="protocol\mgrmsgbodyprotocol.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="protocol\protocolstruct.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="protocol\testmsgbodyprotocol.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="protocol\mgrmsgbodypkg.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="protocol\testmsgbodymgr.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="role.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="rolepkg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="pkgbase.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="gameserver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="gameconfig.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="gameroutersocket.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="httpreqsocket.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="httpsreqsocket.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="config\redcfg.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="config\redloader.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="config\testcfg.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="config\testloader.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="sql\guilddatarecord.h">
+      <Filter>sql</Filter>
+    </ClInclude>
+    <ClInclude Include="sql\roledatarecord.h">
+      <Filter>sql</Filter>
+    </ClInclude>
+    <ClInclude Include="protocol\mgrmsgbodyprotocol.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="protocol\protocolenum.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="protocol\protocolstruct.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="protocol\testmsgbodyprotocol.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="pkgbase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="role.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="rolepkg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="protocol\mgrmsgbodypkg.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="protocol\testmsgbodymgr.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,12 @@
+#ifndef _${name.upper()}_LODER_H_
+#define _${name.upper()}_LODER_H_
+#include "loadcfgbase.h"
+#include "${name}cfg.h"
+class C${name[0].upper()}${name[1:]}CfgLoader:public CBaseLoader<S${name[0].upper()}${name[1:]}Config,std::unordered_map<${key}, const S${name[0].upper()}${name[1:]}Config*>>,public CSingleton<C${name[0].upper()}${name[1:]}CfgLoader>
+{
+public:
+	C${name[0].upper()}${name[1:]}CfgLoader(){}
+	virtual ~C${name[0].upper()}${name[1:]}CfgLoader(){}
+	bool LoadCfg();
+};
+#endif

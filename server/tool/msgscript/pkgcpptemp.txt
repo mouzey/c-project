@@ -1,0 +1,45 @@
+#include"${name.lower()}pkg.h"
+#include"traitsmsghandle.h"
+REGMGHHANDLE(C${name}Pkg)
+bool  C${name}Pkg::Register()
+{
+	REGPKGINDEX(C${name}Pkg);
+	%for msg in arrstruct:
+%if msg.suffix=="Req":
+	REGFUN(&C${name}Pkg::Do${msg.name});
+%endif
+%endfor
+	return false;
+}
+ uint32_t C${name}Pkg::GetScore()const
+ {
+	 return 0; 
+ }
+ void C${name}Pkg::CalcProp(AttributeMgr* mgr)const
+ {
+ }
+ void C${name}Pkg::SyncData()const
+ {
+ }
+ void C${name}Pkg::ToString(std::string& str)const
+ {
+ }
+ void C${name}Pkg::FromString(const std::string& str)
+ {
+ }
+ void C${name}Pkg::Init()
+ {
+ }
+ void C${name}Pkg::Offline()
+ {
+ }
+ void C${name}Pkg::NeWDay()
+ {
+ }
+ %for msg in arrstruct:
+%if msg.suffix=="Req":
+void C${name}Pkg::Do${msg.name}(CRole* role,S${msg.name}&& stReq)
+{
+}
+%endif
+%endfor

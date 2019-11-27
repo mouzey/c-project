@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="libsource">
+      <UniqueIdentifier>{113cecde-cf1b-48de-b4a5-b60004e4a935}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{79082cb3-fe1d-44ab-bfc7-11a80856f240}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boostsignal.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="codebase.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="common_api.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="configmanager.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="continertraits.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="datetime.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="define.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="epollthread.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="errorcode.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="filterword.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="functionevent.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="loadcfgbase.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="localsingleton.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="log.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="logthread.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="msgbase.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="msgmanager.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="mysqlcallback.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="mysqlevent.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="mysqlmanager.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="mysqlrecord.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="newqueue.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="nocopy.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="path.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="rand.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="readcsv.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="recvsignal.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="selectthread.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="sendsignal.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="serverbase.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="signaltype.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="singleton.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="snprintf.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="socket.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="socketthread.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="splitstring.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="tcpclientsocket.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="thread.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="threadevent.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="timerbase.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="timermanager.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="libsource\rapidxml.hpp">
+      <Filter>libsource</Filter>
+    </ClInclude>
+    <ClInclude Include="libsource\rapidxml_iterators.hpp">
+      <Filter>libsource</Filter>
+    </ClInclude>
+    <ClInclude Include="libsource\rapidxml_print.hpp">
+      <Filter>libsource</Filter>
+    </ClInclude>
+    <ClInclude Include="libsource\rapidxml_utils.hpp">
+      <Filter>libsource</Filter>
+    </ClInclude>
+    <ClInclude Include="traitsmsghandle.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="listensocket.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="sslmanager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="libsource\mysha1.h">
+      <Filter>libsource</Filter>
+    </ClInclude>
+    <ClInclude Include="billthread.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="wsssocketthread.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="common_api.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="configmanager.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="datetime.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="epollthread.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="filterword.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="log.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="logthread.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="msgbase.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="msgmanager.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="mysqlevent.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="mysqlmanager.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="path.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="rand.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="readcsv.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="recvsignal.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="selectthread.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="sendsignal.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="serverbase.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="snprintf.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="socket.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="socketthread.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="splitstring.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="tcpclientsocket.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="thread.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="threadevent.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="timerbase.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="timermanager.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="listensocket.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="codebase.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="sslmanager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="libsource\mysha1.cpp">
+      <Filter>libsource</Filter>
+    </ClCompile>
+    <ClCompile Include="billthread.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="wsssocketthread.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

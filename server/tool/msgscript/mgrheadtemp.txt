@@ -1,0 +1,15 @@
+#pragma once
+#include "singleton.h"
+#include"${name.lower()}protocol.h"
+class CRole;
+class C${name}Mgr :public CSingleton<C${name}Mgr>
+{
+public:
+	bool static Register();
+public:
+%for msg in arrstruct:
+%if msg.suffix=="Req":
+	void Do${msg.name}(CRole* role,S${msg.name}&& stReq);
+%endif
+%endfor
+};

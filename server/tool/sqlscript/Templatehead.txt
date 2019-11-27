@@ -1,0 +1,92 @@
+﻿#ifndef _H_${table.upper()}_RECORD_
+#define _H_${table.upper()}_RECORD_
+#include <string>
+#include "define.h"
+#include "mysqlrecord.h"
+class CMysqlCallBack;
+
+class C${table[0].upper()}${table[1:].lower()}Record :public CMysqlRecord
+{
+public:
+	static uint16_t GetColNum(){return ${len(fields)};}
+	C${table[0].upper()}${table[1:].lower()}Record();
+	virtual ~C${table[0].upper()}${table[1:].lower()}Record();
+	void Update(CMysqlCallBack* pCallBack = nullptr, FuncData data=uint64_t(0));
+	void Insert();
+	static void Delete(<%first=1%>\
+	%for data in fields:
+	%if data["key"]==1:
+	%if first == 0:
+,\
+	%endif
+${data['Type']} ${data['Field']}<%first=0%>\
+	%endif
+	%endfor\
+);
+	void Delete(){ Delete(<%first=1%>\
+	%for data in fields:
+%if data["key"]==1:
+	%if first == 0:
+,\
+	%endif
+${data['Field']}<%first=0%>\
+	%endif
+	%endfor\
+);}
+	static void Select(CMysqlCallBack* pCallBack,<%first=1%>\
+	%for data in fields:
+	%if data["key"]==1:
+	%if first == 0:
+,\
+	%endif
+${data['Type']} ${data['Field']}<%first=0%>\
+	%endif
+	%endfor\
+);
+	void Select(CMysqlCallBack* pCallBack){ Select(pCallBack,<%first=1%>\
+	%for data in fields:
+	%if data["key"]==1:
+	%if first == 0:
+,\
+	%endif
+${data['Field']}<%first=0%>\
+	%endif
+	%endfor\
+); }
+	static void Select(CMysqlCallBack* pCallBack, FuncData data,<%first=1%>\
+	%for data in fields:
+	%if data["key"]==1:
+	%if first == 0:
+,\
+	%endif
+${data['Type']} ${data['Field']}<%first=0%>\
+	%endif
+	%endfor\
+);
+	void Select(CMysqlCallBack* pCallBack, FuncData data){ Select(pCallBack,data,<%first=1%>\
+	%for data in fields:
+	%if data["key"]==1:
+	%if first == 0:
+,\
+	%endif
+${data['Field']}<%first=0%>\
+	%endif
+	%endfor\
+);}
+	virtual bool SaveRecord(CMysqlManager* pMysql)override;
+private:
+	bool PostUpdateBuf(CMysqlCallBack* pCallBack = nullptr, FuncData data=uint64_t(0));
+	void PostUpdateStr(CMysqlCallBack* pCallBack = nullptr, FuncData data=uint64_t(0));
+	bool PostInsertBuf();
+	void PostInsertStr();
+public:
+	%for data in fields:
+	${data['Type']} ${data['Field']}\
+	%if data['Default'] != "":
+ = ${data['Default']};
+ %else:
+ ;
+	%endif
+	%endfor
+};
+#endif

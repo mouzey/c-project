@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 公用结构体定义 client表示客户端是否需要 默认是， usemsg是否用于消息传输消息传输定义encode，decode dump函数
+默认是 ，default没有定义默认整数位0字符为空 code=0表示不进行编解码
+moduletype = pkg/mgr（mgr生成全局管理器 pkg生成角色模块）
+suffix= req noti resp(req类型会增加消息处理函数)生成消息的后缀
+msgid 消息id的低位
+moduleid 消息id高位
+--> 
+<root moduleid="1" moduletype="mgr">
+<struct name="pkCSMsgHead" suffix="req" msgid="1" desc="客户端和服务器通信协议头">
+	<data name="MsgSize"  type="i8" desc="消息长度"/>
+	<data name="MsgID"  type="u8" desc=""/>
+</struct>
+<struct name="pkSSMsgHead" suffix="resp" msgid="2" desc="服务器内部通信协议头">
+	<data name="roleID"  type="u64" desc="基础类型"/>
+	<data name="name"  type="string" desc="字符类型"/>
+	<data name="head"  type="CSMsgHead"  desc="结构体类型"/>
+	<data name="skilltype"  type="SkillType"  desc="枚举类型"/>
+	<data name="vectorvtest1"  		type="i32" arr ="vector" arrtype="vector" desc="arr字段取值为vector表示数组 为map表示键值对 arrtype表示后端用的数据类型 如果没有那直接使用arr作为后端数据类型"/>
+	<data name="vectorvtest2"  type="string" arr ="vector" arrtype="vector" desc="arr字段取值为vector表示数组 为map表示键值对 arrtype表示后端用的数据类型 如果没有那直接使用arr作为后端数据类型"/>
+	<data name="vectorvtest3"  type="CSMsgHead" arr ="vector" arrtype="vector" desc="arr字段取值为vector表示数组 为map表示键值对 arrtype表示后端用的数据类型 如果没有那直接使用arr作为后端数据类型"/>
+	<data name="maptest1"  					type="CSMsgHead" arr="map" arrtype="map" keytype="i32" desc="arr字段取值为vector表示数组 为map表示键值对 arrtype表示后端用的数据类型 如果没有那直接使用arr作为后端数据类型"/>
+	<data name="maptest2"  					type="CSMsgHead" arr="vector" arrtype="map" keytype="i32" desc="arr字段取值为vector表示数组 为map表示键值对 arrtype表示后端用的数据类型 如果没有那直接使用arr作为后端数据类型"/>
+</struct>
+<struct name="pkTestMsgStruct" suffix="noti" msgid="3"  desc="">
+	<data name="roleID"  type="u64" desc="基础类型"/>
+	<data name="name"  type="string" desc="字符类型"/>
+	<data name="head"  type="CSMsgHead"  desc="结构体类型"/>
+	<data name="skilltype"  type="SkillType"  desc="枚举类型"/>
+	<data name="vectorvtest1"  		type="i32" arr ="vector" arrtype="vector" desc="arr字段取值为vector表示数组 为map表示键值对 arrtype表示后端用的数据类型 如果没有那直接使用arr作为后端数据类型"/>
+	<data name="vectorvtest2"  type="string" arr ="vector" arrtype="vector" desc="arr字段取值为vector表示数组 为map表示键值对 arrtype表示后端用的数据类型 如果没有那直接使用arr作为后端数据类型"/>
+	<data name="vectorvtest3"  type="CSMsgHead" arr ="vector" arrtype="vector" desc="arr字段取值为vector表示数组 为map表示键值对 arrtype表示后端用的数据类型 如果没有那直接使用arr作为后端数据类型"/>
+	<data name="maptest1"  					type="CSMsgHead" arr="map" arrtype="map" keytype="i32" desc="arr字段取值为vector表示数组 为map表示键值对 arrtype表示后端用的数据类型 如果没有那直接使用arr作为后端数据类型"/>
+	<data name="maptest2"  					type="CSMsgHead" arr="vector" arrtype="map" keytype="i32" desc="arr字段取值为vector表示数组 为map表示键值对 arrtype表示后端用的数据类型 如果没有那直接使用arr作为后端数据类型"/>
+</struct>
+</root>

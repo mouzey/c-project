@@ -1,0 +1,349 @@
+﻿#include "${table}record.h"
+#include "log.h"
+#include "mysqlmanager.h"
+#include "common_api.h"
+#include "snprintf.h"
+C${table[0].upper()}${table[1:].lower()}Record::C${table[0].upper()}${table[1:].lower()}Record()
+{
+}
+C${table[0].upper()}${table[1:].lower()}Record::~C${table[0].upper()}${table[1:].lower()}Record()
+{
+}
+void C${table[0].upper()}${table[1:].lower()}Record::Update(CMysqlCallBack* pCallBack , FuncData data)
+{
+	if (!PostUpdateBuf(pCallBack,data))
+		PostUpdateStr(pCallBack,data);
+}
+void C${table[0].upper()}${table[1:].lower()}Record::Insert()
+{
+	if (!PostInsertBuf())
+		PostInsertStr();
+}
+void C${table[0].upper()}${table[1:].lower()}Record::Delete(<%first=1%>\
+%for data in fields:
+%if data["key"]==1:
+%if first==1:
+${data['Type']} ${data['Field']}<%first=0%>\
+%else:
+,${data['Type']} ${data['Field']}\
+%endif
+%endif
+%endfor
+)
+{
+	char sql[SHORTSQLSIZE];
+	int nRet = SNPRINTF(sql, SHORTSQLSIZE, "delete from ${table} where <%first=1%>\
+%for data in fields:
+%if data["key"]==1:
+%if first==1:
+${data['Field']}=<%first=0%>\
+%else:
+ and ${data['Field']}=\
+%endif
+%if data["Type"]=="std::string":
+'%s'\
+%else:
+${data['format']}\
+%endif
+%endif
+%endfor
+"\
+	%for data in fields:
+	%if data["key"]==1:
+,${data['Field']}\
+	%endif
+	%endfor
+);
+	if (nRet >= SHORTSQLSIZE || nRet < 0)
+		WRITE_ERROR_LOG("build ${table} delete sql has error ret=%d", nRet);
+	else
+		CMysqlManager::Instance().PostSql(sql, nRet);
+}
+void C${table[0].upper()}${table[1:].lower()}Record::Select(CMysqlCallBack* pCallBack\
+%for data in fields:
+%if data["key"]==1:
+,${data['Type']} ${data['Field']}\
+%endif
+%endfor
+)
+{
+	char sql[SHORTSQLSIZE];
+	int nRet = SNPRINTF(sql, SHORTSQLSIZE, "select * from ${table} where <%first=1%>\
+%for data in fields:
+%if data["key"]==1:
+%if first==1:
+${data['Field']}=<%first=0%>\
+%else:
+ and ${data['Field']}=\
+%endif
+%if data["Type"]=="std::string":
+'%s'\
+%else:
+${data['format']}\
+%endif
+%endif
+%endfor
+"\
+	%for data in fields:
+	%if data["key"]==1:
+,${data['Field']}\
+	%endif
+	%endfor
+);
+	if (nRet >= SHORTSQLSIZE || nRet < 0)
+		WRITE_ERROR_LOG("build role delete sql has error ret=%d", nRet);
+	else
+		CMysqlManager::Instance().PostSql<C${table[0].upper()}${table[1:].lower()}Record>(pCallBack, sql, nRet);
+}
+void C${table[0].upper()}${table[1:].lower()}Record::Select(CMysqlCallBack* pCallBack, FuncData data\
+%for data in fields:
+%if data["key"]==1:
+,${data['Type']} ${data['Field']}\
+%endif
+%endfor
+)
+{
+	char sql[SHORTSQLSIZE];
+	int nRet = SNPRINTF(sql, SHORTSQLSIZE, "select * from ${table} where <%first=1%>\
+%for data in fields:
+%if data["key"]==1:
+%if first==1:
+${data['Field']}=<%first=0%>\
+%else:
+ and ${data['Field']}=\
+%endif
+%if data["Type"]=="std::string":
+'%s'\
+%else:
+${data['format']}\
+%endif
+%endif
+%endfor
+"\
+	%for data in fields:
+	%if data["key"]==1:
+,${data['Field']}\
+	%endif
+	%endfor
+);
+	if (nRet >= SHORTSQLSIZE || nRet < 0)
+		WRITE_ERROR_LOG("build role delete sql has error ret=%d", nRet);
+	else
+		CMysqlManager::Instance().PostSql<C${table[0].upper()}${table[1:].lower()}Record>(pCallBack, sql, nRet, data);
+}
+bool C${table[0].upper()}${table[1:].lower()}Record::SaveRecord(CMysqlManager* pMysql)
+{
+	if (GetColNum() != pMysql->GetColNum() || !pMysql->Fetch())
+		return false;
+	uint16_t i = 0;
+	%for data in fields:
+	pMysql->Get(i++,${data['Field']});
+	%endfor
+	return true;
+}
+bool C${table[0].upper()}${table[1:].lower()}Record::PostUpdateBuf(CMysqlCallBack* pCallBack, FuncData data)
+{
+	char* sql = CMysqlManager::Instance().GetBuildSql();
+	uint32_t nSize = (uint32_t)SNPRINTF(sql,SQLMAXSIZE,"update ${table} set <%first=1%>\
+	%for data in fields:
+	%if data["key"]==0 and data['escape']==0:
+	%if data['Type']=="std::string":
+`${data['Field']}`='${data['format']}',<%first=0%>\
+	%else:
+`${data['Field']}`=${data['format']},<%first=0%>\
+	%endif
+	%endif
+	%endfor
+	%if first==1:
+"\
+	%else:
+"\
+	%endif
+	%for data in fields:
+	%if data["key"]==0 and data['escape']==0:
+	%if data['Type']=="std::string":
+,${data['Field']}.data()\
+	%else:
+,${data['Field']}\
+	%endif
+	%endif
+	%endfor\
+);
+%for data in fields:
+	%if data["key"]==0 and data['escape']==1:
+	if (CpySql(sql+nSize,SQLMAXSIZE-nSize,"`${data['Field']}`=",${len(data['Field'])+3},nSize)||ESCAPESTR(${data['Field']},sql+nSize,SQLMAXSIZE-nSize,nSize))return false;
+	%endif
+%endfor
+	nSize -= 1;<%first=1%><%flag=1%>
+	%for data in fields:
+	%if data["key"]==1:
+	%if flag==1:
+	if (CpySql(sql + nSize, SQLMAXSIZE - nSize, " where `${data['Field']}`=", ${len(data['Field'])+10}, nSize))return false;<%flag=0%>
+	%else:
+	if (CpySql(sql + nSize, SQLMAXSIZE - nSize, " and `${data['Field']}`=", ${len(data['Field'])+8}, nSize))return false;
+	%endif
+	%if data['escape']==0:
+	%if data['Type']=="std::string":
+	if (nSize >= SQLMAXSIZE)return false;
+	sql[nSize++]='"'
+	%endif
+	%if first==1:
+	auto nRet = ToStr(${data['Field']}, sql + nSize, SQLMAXSIZE - nSize);<%first=0%>
+	nSize += nRet;
+	if (nRet < 0 || nSize > SQLMAXSIZE)return false;
+	%else:
+	nRet = ToStr(${data['Field']}, sql + nSize, SQLMAXSIZE - nSize);
+	nSize += nRet;
+	if (nRet < 0 || nSize > SQLMAXSIZE)return false;
+	%endif
+	%if data['Type']=="std::string":
+	if (nSize >= SQLMAXSIZE)return false;
+	sql[nSize++]='"'
+	%endif
+	%else:
+	if (ESCAPESTR(${data['Field']}, sql + nSize, SQLMAXSIZE - nSize, nSize))return false;
+	%endif
+	%endif
+	%endfor
+	if(nullptr == pCallBack)
+		CMysqlManager::Instance().PostSql(sql, nSize);
+	else if(data.u64 != 0)
+		CMysqlManager::Instance().PostSql(pCallBack, sql, nSize,data);
+	else
+		CMysqlManager::Instance().PostSql(pCallBack, sql, nSize);
+	return true;
+}
+void C${table[0].upper()}${table[1:].lower()}Record::PostUpdateStr(CMysqlCallBack* pCallBack, FuncData data)
+{
+	char buf[32];
+	std::string sql;
+	sql.reserve(SQLMAXSIZE + SHORTSQLSIZE);
+	sql.append("update ${table} set ",${len(table)+12});<%first=1%>
+	%for data in fields:
+	%if data['key']==0:
+	%if first==1:
+	sql.append("`${data['Field']}`=",${len(data['Field'])+3});<%first=0%>\
+	%else:
+	sql.append(",`${data['Field']}`=",${len(data['Field'])+4});\
+	%endif
+	%if data['escape']==0:
+	%if data['Type']=="std::string":
+sql.append(1,'"');sql.append(${data['Field']});sql.append(1,'"');
+	%else:
+sql.append(buf, ToStr(${data['Field']}, buf, 32));
+	%endif
+	%else:
+ESCAPESTR(${data['Field']}, sql);
+	%endif
+	%endif
+	%endfor
+	<%first=1%>
+	%for data in fields:
+	%if data['key']==1:
+	%if first==1:
+	sql.append(" where `${data['Field']}`=",${len(data['Field'])+10});<%first=0%>
+	%else:
+	sql.append(" and `${data['Field']}`=",${len(data['Field'])+8});
+	%endif
+	%if data['escape']==0:
+	%if data['Type']!="std::string":
+	sql.append(buf, ToStr(${data['Field']}, buf, 32));
+	%else:
+	sql.append(1,'"')
+	sql.append(${data['Field']});
+	sql.append(1,'"')
+	%endif
+	%else:
+	ESCAPESTR(${data['Field']}, sql);
+	%endif
+	%endif
+	%endfor
+	if (nullptr == pCallBack)
+		CMysqlManager::Instance().PostSql((char*)sql.data(), (uint32_t)sql.size());
+	else if (data.u64 != 0)
+		CMysqlManager::Instance().PostSql(pCallBack, (char*)sql.data(), (uint32_t)sql.size(), data);
+	else
+		CMysqlManager::Instance().PostSql(pCallBack, (char*)sql.data(), (uint32_t)sql.size());
+}
+bool C${table[0].upper()}${table[1:].lower()}Record::PostInsertBuf()
+{
+	char* sql = CMysqlManager::Instance().GetBuildSql();
+	uint32_t  nSize = SNPRINTF(sql ,SQLMAXSIZE, "insert into ${table} (\
+%for index,data in enumerate(fields):
+%if data['auto']==0:
+%if index == 0 :
+`${data['Field']}`\
+%else:
+,`${data['Field']}`\
+%endif
+%endif
+%endfor
+ )value(\
+	%for data in fields:
+	%if data['auto']==0 and data['escape']==0:
+	%if data['Type'] == "std::string":
+'${data['format']}',\
+	%else:
+${data['format']},\
+	%endif
+	%endif
+	%endfor
+"\
+%for data in fields:
+	%if data['auto']==0 and data['escape']==0:
+	%if data['Type'] == "std::string":
+,${data['Field']}.data()\
+	%else:
+,${data['Field']}\
+	%endif
+	%endif
+	%endfor
+);
+	%for data in fields:
+	%if data['auto']==0 and data['escape']==1:
+	if (ESCAPESTR(${data['Field']}, sql + nSize, SQLMAXSIZE - nSize, nSize))return false;
+	%endif
+	%endfor
+	sql[nSize - 1] = ')';
+	CMysqlManager::Instance().PostSql(sql, nSize);
+	return true;
+}
+void C${table[0].upper()}${table[1:].lower()}Record::PostInsertStr()
+{
+	char buf[32];
+	std::string sql;
+	sql.reserve(SQLMAXSIZE + SHORTSQLSIZE);
+	sql.append("insert into ${table} (\
+%for index,data in enumerate(fields):
+%if data['auto']==0:
+%if index == 0 :
+`${data['Field']}`\
+%else:
+,`${data['Field']}`\
+%endif
+%endif
+%endfor
+ )value(");<%first=1%>
+	%for data in fields:
+	%if data['auto']==0 and data['escape']==0:
+	%if first==0:
+	sql.append(1,',');\
+	%endif
+	%if data['Type']=="std::string":
+	sql.append(1,'"'); sql.append(${data['Field']}); sql.append(1,'"');<%first=0%>
+	%else:
+	sql.append(buf, ToStr(${data['Field']}, buf, 32));<%first=0%>
+	%endif
+	%endif
+	%endfor
+	%for data in fields:
+	%if data['auto']==0 and data['escape']==1:
+	%if first==0:
+	sql.append(1,',');\
+	%endif
+	ESCAPESTR(${data['Field']}, sql);<%first=0%>
+	%endif
+	%endfor
+	sql.append(1, ')');
+	CMysqlManager::Instance().PostSql((char*)sql.data(), (uint32_t)sql.size());
+}
