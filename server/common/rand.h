@@ -1,6 +1,6 @@
 #pragma once
 #include <stdint.h>
-//Ëæ»úº¯Êý
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 class CRandom
 {
 public:
