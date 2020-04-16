@@ -11,5 +11,4 @@ public:
 	static uint32_t Rand32(uint32_t max=UINT32_MAX, uint32_t min=0);
 	static uint64_t Rand64(uint64_t max=UINT64_MAX, uint64_t min=0);
 	static void Seed();
-	static void Seed();
 };
