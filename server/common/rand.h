@@ -1,6 +1,6 @@
 #pragma once
 #include <stdint.h>
-//Ëæ»úº¯Êý
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 class CRandom
 {
 public:
@@ -13,5 +13,6 @@ public:
 	static void Seed();
 	template<T>
 	static void Rand(std::vector<T>&in,std::vector<T>&out){}
-	static void Rand(const std::vector<T>&in,std::vector<T>&out){}
+	template<T>
+	static void Rand(const& std::vector<T>&in,std::vector<T>&out){}
 };
