@@ -619,7 +619,7 @@ bool CClientSocket::OnAccept()
 		 if (GetLastSendSize() > 0)//上次数据没有发送成功需要用相同的参数发送
 		 {
 			 int nRet = SSL_write(GetSSL(), arrBuf[0].buf, GetLastSendSize());
-			 if (nRet >0 && (uint32_t)nRet == GetLastSendSize())
+			 if ((uint32_t)nRet == GetLastSendSize())
 			 {
 				 m_pSendBuf->Remove(GetLastSendSize());
 				 SetLastSendSize(0);
@@ -631,15 +631,16 @@ bool CClientSocket::OnAccept()
 			 return S_OK;
 		 }
 		 int nRet = SSL_write(GetSSL(), arrBuf[0].buf, arrBuf[0].len);
-		 if (nRet > 0 && (uint32_t)nRet != arrBuf[0].len)
-		 {
-			 auto nErr = SSL_get_error(GetSSL(), nRet);
-			 if (nErr != SSL_ERROR_WANT_WRITE)
-				 return E_UNKNOW;//socket 已经发生了错误
-			 SetLastSendSize(arrBuf[0].len);//保存参数
-			 return S_OK;
-		 }
-		 m_pSendBuf->Remove(arrBuf[0].len);
+		if ( (uint32_t)nRet == arrBuf[0].len)
+        			m_pSendBuf->Remove(arrBuf[0].len);
+    		else
+    		{
+       			auto nErr = SSL_get_error(GetSSL(), nRet);
+       			if(nErr != SSL_ERROR_WANT_WRITE)
+        			return E_UNKNOW;//socket 已经发生了错误
+       			SetLastSendSize(arrBuf[0].len);//保存参数
+       			return S_OK;
+   		 }
 	 }
 	 if (nCount >= 10)//达到了循环次数
 		 g_pSocketThread->EpollMod(this);
