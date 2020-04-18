@@ -43,4 +43,12 @@ public:
 		}
 		return true;
 	}
+	template<class T>
+	static bool RandRepeat(const std::vector<T>& in, std::vector<T>& out, uint32_t num)//可以重复随机
+	{
+		if (in.empty())return false;
+		for (size_t i = 0;i < num;++i)
+			out.emplace_back(in[Rand64(in.size() - 1)]);
+		return true;
+	}
 };
