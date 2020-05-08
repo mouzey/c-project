@@ -12,7 +12,7 @@ int main(int argc, char* argv[])
 	RegistSignal(&CAgentServer::SigHandle);
 	CAgentConfig::Instance().SetPath(GetDir(argv[0]));
 	g_log->SetFileName(GetServerName(argv[0]).data());
-	std::string logpath = CAgentConfig::Instance().GetPath(); + "log";
+	std::string logpath = CAgentConfig::Instance().GetPath()+ "log";
 	CreateDir(logpath.data());
 	CLogThread::Instance().Start();
 	if (CAgentConfig::Instance().LoadCfg())
