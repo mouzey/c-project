@@ -12,4 +12,5 @@ function addordec(lef,right,op)
         return lef*right
     end
 end
+val = 123
 --print('******************base.lua end******************') 
